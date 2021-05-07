@@ -72,14 +72,29 @@ public abstract class Movie extends Database {
     
     public int returnMovie(int movie_id){
             int handleupdate = 0;
+            int handleupdate1 = 0;
 
             try {
+                ResultSet rs;
                 Connection conn=db.makeConnection();
-                Statement stmt=conn.createStatement();               
-                String query1 ="update movies set status='0' where id='"+movie_id+"'";
-                handleupdate=stmt.executeUpdate(query1);     
-                if(handleupdate==1){
-                    return handleupdate;
+                Statement stmt=conn.createStatement();             
+                PreparedStatement p=null;           
+                
+                String query2 ="SELECT * from movies where status=1 && id='"+movie_id+"'";
+                p=conn.prepareStatement(query2);
+                rs=p.executeQuery();
+                if(rs.next()){ 
+                    String query1 ="update movies set status='0' where id='"+movie_id+"'";
+                    handleupdate=stmt.executeUpdate(query1);     
+                    if(handleupdate==1){
+                        return handleupdate;
+                    }
+                    else{
+                        return handleupdate;
+                    }
+                }
+                else{
+                    return handleupdate1;
                 }
             } catch (SQLException ex) {
                 Logger.getLogger(index.class.getName()).log(Level.SEVERE, null, ex);
