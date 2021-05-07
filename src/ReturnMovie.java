@@ -113,16 +113,17 @@ public class ReturnMovie extends javax.swing.JFrame {
         else{
             if(!movie_id.matches("[0-9]+")){
                     JOptionPane.showMessageDialog(null,"Movie id can only be in numbers");//check if input is integer
+                    jTextField1.setText(""); //empty field
             }
             else{
                 int result = movie.returnMovie(Integer.parseInt(movie_id));
                 if(result==0){
                     JOptionPane.showMessageDialog(null,"Movie id do not exit");//query failed
-                    jTextField1.setText("");
+                    jTextField1.setText(""); //empty field
                     }
                 else{
                     JOptionPane.showMessageDialog(null,"Movie returned successfully");//successfully
-                    jTextField1.setText("");
+                    jTextField1.setText(""); //empty field
                 }
             }
         }
