@@ -10,6 +10,7 @@ public abstract class Movie extends Database {
     private String name;
     private String release_date;
     private String status;
+    private int is_rental;
     Database db;
 
     public Movie() {
@@ -51,6 +52,15 @@ public abstract class Movie extends Database {
     public void setStatus(String status) {
         this.status = status;
     }
+
+    public int getIs_rental() {
+        return is_rental;
+    }
+
+    public void setIs_rental(int is_rental) {
+        this.is_rental = is_rental;
+    }
+    
     
     public ResultSet getMovieList(){
         ResultSet rs=null;
@@ -68,7 +78,12 @@ public abstract class Movie extends Database {
         return rs;
     }
     
-    public abstract int rentMovie(int movie_id,String payment_type);
+    public abstract int rentMovie(int movie_id,int customer_id,String payment_type);
+    
+    public abstract int isRental(int movie_id);
+    
+    public abstract int isLimitExceed(int customer_id);
+
     
     public int returnMovie(int movie_id){
             int handleupdate = 0;
@@ -85,7 +100,9 @@ public abstract class Movie extends Database {
                 rs=p.executeQuery();
                 if(rs.next()){ 
                     String query1 ="update movies set status='0' where id='"+movie_id+"'";
-                    handleupdate=stmt.executeUpdate(query1);     
+                    handleupdate=stmt.executeUpdate(query1);
+                    String query3 ="update rent set status=0 where movie_id='"+movie_id+"'"; //update rent status to 0 mean title is return by particular person
+                    stmt.executeUpdate(query3);
                     if(handleupdate==1){
                         return handleupdate;
                     }

@@ -1,9 +1,10 @@
 import javax.swing.JOptionPane;
 import net.proteanit.sql.DbUtils;
 
-public class RentMovie extends javax.swing.JFrame {
+public class RentMovie extends javax.swing.JFrame implements Payment {
 
     public PayRental movie;//compostiton
+    public Customer customer;//compostiton
     /**
      * Creates new form RentMovie
      */
@@ -11,6 +12,7 @@ public class RentMovie extends javax.swing.JFrame {
     public RentMovie() {
         initComponents();
         movie=new PayRental();
+        customer=new Customer();
     }
 
     /**
@@ -24,6 +26,7 @@ public class RentMovie extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+        jButton5 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
@@ -32,12 +35,25 @@ public class RentMovie extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         jTextField2 = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        jTextField3 = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        jTextField4 = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        jTextField5 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(153, 153, 153));
 
         jLabel1.setText("Xtra Vision");
+
+        jButton5.setText("Back");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -46,13 +62,17 @@ public class RentMovie extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(279, 279, 279)
                 .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(294, 294, 294))
+                .addGap(211, 211, 211)
+                .addComponent(jButton5)
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(16, Short.MAX_VALUE)
-                .addComponent(jLabel1)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jButton5))
                 .addContainerGap())
         );
 
@@ -87,6 +107,12 @@ public class RentMovie extends javax.swing.JFrame {
 
         jLabel6.setText("Enter coupon to get free movie");
 
+        jLabel2.setText("Name");
+
+        jLabel3.setText("Email");
+
+        jLabel4.setText("Card Number");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -100,18 +126,32 @@ public class RentMovie extends javax.swing.JFrame {
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 637, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(10, 10, 10))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel5)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(jButton2)
                                 .addGroup(layout.createSequentialGroup()
                                     .addComponent(jLabel6)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, 95, Short.MAX_VALUE)
-                                        .addComponent(jTextField2)))
-                                .addComponent(jTextField1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jTextField1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(80, 80, 80)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel4))
+                        .addGap(27, 27, 27)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(266, 266, 266))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -124,14 +164,22 @@ public class RentMovie extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3)
+                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4)
+                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
                 .addComponent(jButton3)
-                .addGap(0, 62, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         pack();
@@ -142,15 +190,20 @@ public class RentMovie extends javax.swing.JFrame {
         jTable1.setModel(DbUtils.resultSetToTableModel(movie.getMovieList()));
     }//GEN-LAST:event_jButton2ActionPerformed
    
+    public int validateCard(int card){
+        return card;
+    }
+    
+    
     
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         //TODO add your handling code here:
         String movie_id=jTextField1.getText();
+        String name=jTextField3.getText();
+        String email=jTextField4.getText();
+
         String coupon=jTextField2.getText();
-        if(movie_id.isEmpty()){ //check if field is empty
-            JOptionPane.showMessageDialog(null,"Field cannot be empty"); //empty alert
-        }
-        else{
+        if((!movie_id.isEmpty())&&(!name.isEmpty())&&(!email.isEmpty())){ //check if field is empty
             
             if(!coupon.isEmpty()){ //check if field is not empty
                 if(coupon.equalsIgnoreCase("FREE123")){ //check if coupon is valid
@@ -158,12 +211,27 @@ public class RentMovie extends javax.swing.JFrame {
                         JOptionPane.showMessageDialog(null,"Movie id can only be in numbers");//check if input is integer
                     }
                     else{
-                        int result = movie.rentMovie(Integer.parseInt(movie_id),"Free");
-                        if(result==0){
-                            JOptionPane.showMessageDialog(null,"Movie id do not exit");//query failed
+                        int customer_id=customer.addCustomer(name, email);
+                        int limit_exceed=movie.isLimitExceed(customer_id);
+                        if(limit_exceed==1){
+                            int is_rental = movie.isRental(Integer.parseInt(movie_id));
+                            
+                            if(is_rental==1){
+                                int result = movie.rentMovie(Integer.parseInt(movie_id),customer_id,"Free");
+                                if(result==0){
+                                    JOptionPane.showMessageDialog(null,"Movie id do not exit");//query failed
+                                }
+                                else{
+                                    JOptionPane.showMessageDialog(null,"Free Movie rented successfully");//successfully
+                                }
+                            }
+                            else{
+                                JOptionPane.showMessageDialog(null,"Movie Not Available");//query failed
+                            }
+                            
                         }
                         else{
-                            JOptionPane.showMessageDialog(null,"Movie rented successfully");//successfully
+                            JOptionPane.showMessageDialog(null,"Limit Exceeded! Cannot Rent a Movie");//limit exceed
                         }
                     }
                 }
@@ -177,18 +245,41 @@ public class RentMovie extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(null,"Movie id can only be in numbers");//check if input is integer
                 }
                 else{
-                    int result = movie.rentMovie(Integer.parseInt(movie_id),"Paid");
-                    if(result==0){
-                        JOptionPane.showMessageDialog(null,"Movie id do not exit");//query failed
+                        int customer_id=customer.addCustomer(name, email);
+                        int limit_exceed=movie.isLimitExceed(customer_id);
+                        if(limit_exceed==1){
+                            int is_rental = movie.isRental(Integer.parseInt(movie_id));
+                            if(is_rental==1){
+                                int result = movie.rentMovie(Integer.parseInt(movie_id),customer_id,"Paid");
+                                if(result==0){
+                                    JOptionPane.showMessageDialog(null,"Movie id do not exit");//query failed
+                                }
+                                else{
+                                    JOptionPane.showMessageDialog(null,"Movie rented successfully");//successfully
+                                }
+                            }
+                            else{
+                                JOptionPane.showMessageDialog(null,"Movie Not Available");//query failed
+                            }             
+                        }
+                        else{
+                            JOptionPane.showMessageDialog(null,"Limit Exceeded! Cannot Rent a Movie");//limit exceed
+                        }
                     }
-                    else{
-                        JOptionPane.showMessageDialog(null,"Movie rented successfully");//successfully
-                    }
-                }
             }
+        }
+        else{
+            JOptionPane.showMessageDialog(null,"Field cannot be empty"); //empty alert
         }
                  
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        // TODO add your handling code here:
+        dispose();
+        Home h=new Home();
+        h.setVisible(true);
+    }//GEN-LAST:event_jButton5ActionPerformed
 
     
     
@@ -196,7 +287,11 @@ public class RentMovie extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
@@ -204,5 +299,8 @@ public class RentMovie extends javax.swing.JFrame {
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
+    private javax.swing.JTextField jTextField3;
+    private javax.swing.JTextField jTextField4;
+    private javax.swing.JTextField jTextField5;
     // End of variables declaration//GEN-END:variables
 }
