@@ -1,22 +1,10 @@
 
 import javax.swing.JOptionPane;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/**
- *
- * @author rjars
- */
 public class ReturnMovie extends javax.swing.JFrame {
 
-    /**
-     * Creates new form ReturnMovie
-     */
     public Movie movie;
+    
     public ReturnMovie() {
         initComponents();
         movie=new Movie() {
@@ -151,6 +139,7 @@ public class ReturnMovie extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    //back button
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
         dispose();

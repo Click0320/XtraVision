@@ -4,23 +4,23 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 
-public abstract class Movie extends Database {
+public abstract class Movie extends Database { //inheritance and abstract class
     
     private String id;
     private String name;
     private String release_date;
     private String status;
     private int is_rental;
-    Database db;
-
+    
     public Movie() {
+        super();
         this.id = id;
         this.name = name;
         this.release_date = release_date;
         this.status = status;
-        db=new Database();
     }
 
+    //get set method
     public String getId() {
         return id;
     }
@@ -61,14 +61,14 @@ public abstract class Movie extends Database {
         this.is_rental = is_rental;
     }
     
-    
+    //get movies list
     public ResultSet getMovieList(){
         ResultSet rs=null;
         try {
-            Connection conn=db.makeConnection();
+            Connection conn=this.makeConnection(); //database class
             Statement stmt=conn.createStatement();
             PreparedStatement p=null;           
-            String query2 ="SELECT * from movies where status=0";
+            String query2 ="SELECT * from movies where status=0"; //get all movies which are not rented yet
             p=conn.prepareStatement(query2);
             rs=p.executeQuery();
             return rs;
@@ -78,28 +78,29 @@ public abstract class Movie extends Database {
         return rs;
     }
     
+    //abstract method
     public abstract int rentMovie(int movie_id,int customer_id,String payment_type);
     
     public abstract int isRental(int movie_id);
     
     public abstract int isLimitExceed(int customer_id);
 
-    
+    //return movie
     public int returnMovie(int movie_id){
             int handleupdate = 0;
             int handleupdate1 = 0;
 
             try {
                 ResultSet rs;
-                Connection conn=db.makeConnection();
+                Connection conn=this.makeConnection();
                 Statement stmt=conn.createStatement();             
                 PreparedStatement p=null;           
                 
-                String query2 ="SELECT * from movies where status=1 && id='"+movie_id+"'";
+                String query2 ="SELECT * from movies where status=1 && id='"+movie_id+"'"; //check if movie is rented
                 p=conn.prepareStatement(query2);
                 rs=p.executeQuery();
                 if(rs.next()){ 
-                    String query1 ="update movies set status='0' where id='"+movie_id+"'";
+                    String query1 ="update movies set status=0 where id='"+movie_id+"'"; //change status to available
                     handleupdate=stmt.executeUpdate(query1);
                     String query3 ="update rent set status=0 where movie_id='"+movie_id+"'"; //update rent status to 0 mean title is return by particular person
                     stmt.executeUpdate(query3);

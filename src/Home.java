@@ -1,5 +1,5 @@
 
-public class Home extends javax.swing.JFrame {
+public class Home extends javax.swing.JFrame {  //inheritance
 
     /**
      * Creates new form Home
@@ -9,14 +9,14 @@ public class Home extends javax.swing.JFrame {
     }
     
     public void rentMovie(){
-        dispose();
-        RentMovie rt=new RentMovie();
+        dispose(); //close current screen
+        RentMovie rt=new RentMovie(); //redirect to new page
         rt.setVisible(true);
     }
     
     public void returnMovie(){
-        dispose();
-        ReturnMovie ret=new ReturnMovie();
+        dispose(); //close current screen
+        ReturnMovie ret=new ReturnMovie(); //redirect to new page
         ret.setVisible(true);
     }
 
@@ -99,12 +99,12 @@ public class Home extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        rentMovie();
+        rentMovie(); //function calling
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        returnMovie();
+        returnMovie(); //function calling
     }//GEN-LAST:event_jButton2ActionPerformed
 
 

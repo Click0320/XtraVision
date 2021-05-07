@@ -4,14 +4,15 @@ import java.util.logging.Logger;
 
 public class Database {
     
-    String dbpath="jdbc:mysql://localhost:3306/xtravision";
-    String dbuser="root";
-    String dbpassword =""; 
+    String dbpath="jdbc:mysql://localhost:3306/xtravision"; //db path
+    String dbuser="root"; //db username
+    String dbpassword ="";  //db password default null
 
     public Database() {
         
     }
     
+    //getter & setter
     public String getDbpath() {
         return dbpath;
     }
@@ -36,6 +37,7 @@ public class Database {
         this.dbpassword = dbpassword;
     }
     
+    //make connection
     public Connection makeConnection(){
         Connection conn = null;
         try {

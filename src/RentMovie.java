@@ -11,7 +11,7 @@ public class RentMovie extends javax.swing.JFrame implements Payment {
     
     public RentMovie() {
         initComponents();
-        movie=new PayRental();
+        movie=new PayRental(); //constructor
         customer=new Customer();
     }
 
@@ -187,12 +187,12 @@ public class RentMovie extends javax.swing.JFrame implements Payment {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:           
-        jTable1.setModel(DbUtils.resultSetToTableModel(movie.getMovieList()));
+        jTable1.setModel(DbUtils.resultSetToTableModel(movie.getMovieList())); //display movie list as a table
     }//GEN-LAST:event_jButton2ActionPerformed
    
-    public int validateCard(String card){    
+    public int validateCard(String card){//card validation
         int status=0;
-        if(!card.matches("^[a-zA-Z0-9]+$")){
+        if(!card.matches("^[a-zA-Z0-9]+$")){ //return 1 if matches
             return status;
         }
         else{
@@ -205,7 +205,7 @@ public class RentMovie extends javax.swing.JFrame implements Payment {
     
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         //TODO add your handling code here:
-        String movie_id=jTextField1.getText();
+        String movie_id=jTextField1.getText(); //getting data from textfields
         String name=jTextField3.getText();
         String email=jTextField4.getText();
         String card=jTextField5.getText();
@@ -222,8 +222,8 @@ public class RentMovie extends javax.swing.JFrame implements Payment {
                         JOptionPane.showMessageDialog(null,"Movie id can only be in numbers");//check if input is integer
                     }
                     else{
-                        int customer_id=customer.addCustomer(name, email);
-                        int limit_exceed=movie.isLimitExceed(customer_id);
+                        int customer_id=customer.addCustomer(name, email); //get customer id
+                        int limit_exceed=movie.isLimitExceed(customer_id); //check if limit of the person exceeds or not
                         if(limit_exceed==1){
                             int is_rental = movie.isRental(Integer.parseInt(movie_id));
                             
@@ -252,12 +252,12 @@ public class RentMovie extends javax.swing.JFrame implements Payment {
                 }
             }
             else{ 
-                if(!movie_id.matches("[0-9]+")){
-                    JOptionPane.showMessageDialog(null,"Movie id can only be in numbers");//check if input is integer
+                if(!movie_id.matches("[0-9]+")){ //check if input is integer
+                    JOptionPane.showMessageDialog(null,"Movie id can only be in numbers");
                 }
                 else{
-                        int customer_id=customer.addCustomer(name, email);
-                        int limit_exceed=movie.isLimitExceed(customer_id);
+                        int customer_id=customer.addCustomer(name, email); //get new customer id
+                        int limit_exceed=movie.isLimitExceed(customer_id); //check if limit of the person exceeds or not
                         if(limit_exceed==1){
                             int is_rental = movie.isRental(Integer.parseInt(movie_id));
                             if(is_rental==1){
@@ -289,10 +289,11 @@ public class RentMovie extends javax.swing.JFrame implements Payment {
                  
     }//GEN-LAST:event_jButton3ActionPerformed
 
+    //back button
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
-        dispose();
-        Home h=new Home();
+        dispose(); //close current screen
+        Home h=new Home(); //redirect to new screen
         h.setVisible(true);
     }//GEN-LAST:event_jButton5ActionPerformed
 

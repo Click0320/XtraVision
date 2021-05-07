@@ -1,26 +1,21 @@
-
 import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 public class Customer {
     private String name;
     private int id;
     private String email;
     Database db;
 
-    public Customer() {
+    public Customer() { //constructor
         this.name = name;
         this.email = email;
         this.id=id;
         db=new Database();
     }
 
+    //get set methods
     public int getId() {
         return id;
     }
@@ -29,8 +24,6 @@ public class Customer {
         this.id = id;
     }
     
-    
-
     public String getName() {
         return name;
     }
@@ -47,6 +40,7 @@ public class Customer {
         this.email = email;
     }
     
+    //add new customer
     public int addCustomer(String name, String email){
         int handleupdate=0;
         try{
@@ -55,11 +49,11 @@ public class Customer {
         Statement stmt=conn.createStatement();                     
         PreparedStatement p=null;           
                 
-        String query2 ="SELECT * from customers where email='"+email+"'";
+        String query2 ="SELECT * from customers where email='"+email+"'"; //check if customer already exists
         p=conn.prepareStatement(query2);
         rs=p.executeQuery();
             if(!rs.next()){ 
-                String query ="insert into customers(name,email) values ('"+name+"','"+email+"')";
+                String query ="insert into customers(name,email) values ('"+name+"','"+email+"')"; //add new customer
                 stmt.executeUpdate(query);              
                 addCustomer(name,email);
             }
@@ -72,10 +66,6 @@ public class Customer {
         catch (SQLException ex) {
             Logger.getLogger(index.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
         return this.getId();
-
-    }
-    
-    
+    }   
 }
