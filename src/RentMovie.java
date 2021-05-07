@@ -1,7 +1,7 @@
 import javax.swing.JOptionPane;
 import net.proteanit.sql.DbUtils;
 
-public class RentMovie extends javax.swing.JFrame implements Payment {
+public class RentMovie extends javax.swing.JFrame {
 
     public PayRental movie;//compostiton
     /**
@@ -141,10 +141,7 @@ public class RentMovie extends javax.swing.JFrame implements Payment {
         // TODO add your handling code here:           
         jTable1.setModel(DbUtils.resultSetToTableModel(movie.getMovieList()));
     }//GEN-LAST:event_jButton2ActionPerformed
-    
-    public int validateCard(int card){
-        return card;
-    }
+   
     
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         //TODO add your handling code here:
