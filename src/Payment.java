@@ -10,6 +10,6 @@
  */
 public interface Payment {
     
-    public int validateCard(int card);
+    public int validateCard(String card);
     
 }

@@ -144,9 +144,9 @@ public class RentMovie extends javax.swing.JFrame implements Payment {
                             .addComponent(jLabel3)
                             .addComponent(jLabel4))
                         .addGap(27, 27, 27)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jTextField5, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
+                            .addComponent(jTextField4))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -190,8 +190,15 @@ public class RentMovie extends javax.swing.JFrame implements Payment {
         jTable1.setModel(DbUtils.resultSetToTableModel(movie.getMovieList()));
     }//GEN-LAST:event_jButton2ActionPerformed
    
-    public int validateCard(int card){
-        return card;
+    public int validateCard(String card){    
+        int status=0;
+        if(!card.matches("^[a-zA-Z0-9]+$")){
+            return status;
+        }
+        else{
+            status=1;
+            return status;
+        }
     }
     
     
@@ -201,10 +208,14 @@ public class RentMovie extends javax.swing.JFrame implements Payment {
         String movie_id=jTextField1.getText();
         String name=jTextField3.getText();
         String email=jTextField4.getText();
+        String card=jTextField5.getText();
 
         String coupon=jTextField2.getText();
-        if((!movie_id.isEmpty())&&(!name.isEmpty())&&(!email.isEmpty())){ //check if field is empty
+        if((!movie_id.isEmpty())&&(!name.isEmpty())&&(!email.isEmpty())&&(!card.isEmpty())){ //check if field is empty
             
+            int vc=validateCard(card);
+            if(vc==1){
+         
             if(!coupon.isEmpty()){ //check if field is not empty
                 if(coupon.equalsIgnoreCase("FREE123")){ //check if coupon is valid
                     if(!movie_id.matches("[0-9]+")){ //check if input is integer
@@ -266,6 +277,10 @@ public class RentMovie extends javax.swing.JFrame implements Payment {
                             JOptionPane.showMessageDialog(null,"Limit Exceeded! Cannot Rent a Movie");//limit exceed
                         }
                     }
+            }
+        }
+            else{
+                JOptionPane.showMessageDialog(null,"Invalid Card"); //empty alert
             }
         }
         else{
